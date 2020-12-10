@@ -18,9 +18,15 @@ const routes = [
   },
   {
     path: "/admin",
-    name: "Admin",
+    name: "Spinneret Admin",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Auth.vue")
+  },
+  {
+    path: "/admin/users",
+    name: "Spinneret Admin | Users",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/UserListing.vue")
   }
 ];
 

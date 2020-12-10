@@ -9,21 +9,32 @@ const API = "http://localhost:3000";
 export default new Vuex.Store({
   state: {
     user: null,
+    userToken: null,
+    users: [],
     posts: []
   },
   getters: {
     user: state => state.user,
+    users: state => state.users,
+    userToken: state => state.userToken,
     posts: state => state.posts
   },
   mutations: {
     setUser(state, user) {
       state.user = user;
     },
+    setUsers(state, users) {
+      state.users = users;
+    },
+    setUserToken(state, token) {
+      state.userToken = token;
+    },
     setPosts(state, posts) {
       state.posts = posts;
     }
   },
   actions: {
+
     // Auth
     register({ commit }, payload) {
       axios.post(`${API}/register`, payload).then(
@@ -38,7 +49,21 @@ export default new Vuex.Store({
     login({ commit }, payload) {
       axios.post(`${API}/login`, payload).then(
         response => {
-          commit('setUser', response.user);
+          console.log(response);
+          commit('setUserToken', response.data.token);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+
+    // Users
+    fetchUsers({ commit }) {
+      axios.get(`${API}/users`).then(
+        response => {
+          console.log(response);
+          commit('setUsers', response.data.users);
         },
         error => {
           console.log(error);
