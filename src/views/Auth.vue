@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Register />
     <Signin v-if="!userToken" />
     <div v-else>
       <div id="nav">
-        <router-link to="/users">Users</router-link> |
+        <router-link to="/admin/users">Users</router-link> |
+        <router-link to="/admin/blog">Blog</router-link> |
       </div>
       <h1> Welcome! </h1>
     </div>
@@ -14,13 +14,11 @@
 <script>
 import { mapGetters } from 'vuex';
 import Signin from '@/components/Signin';
-import Register from '@/components/Register';
 
 export default {
   name: "Blog",
   components: {
-    Signin,
-    Register
+    Signin
   },
   data() {
     return {

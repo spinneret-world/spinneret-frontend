@@ -17,6 +17,12 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Blog.vue")
   },
   {
+    path: "/experiences",
+    name: "Experiences",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ShowListing.vue")
+  },
+  {
     path: "/admin",
     name: "Spinneret Admin",
     component: () =>
@@ -27,6 +33,24 @@ const routes = [
     name: "Spinneret Admin | Users",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/UserListing.vue")
+  },
+  {
+    path: "/admin/blog",
+    name: "Spinneret Admin | Blog",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/BlogListing.vue")
+  },
+  {
+    path: "/admin/blog/add",
+    name: "Spinneret Admin | Blog",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/BlogAddEdit.vue")
+  },
+  {
+    path: "/admin/blog/edit/:id",
+    name: "Spinneret Admin | Blog",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/BlogAddEdit.vue")
   }
 ];
 

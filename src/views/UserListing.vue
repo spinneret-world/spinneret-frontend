@@ -1,5 +1,7 @@
 <template>
   <div>
+    uSERS
+    <Register />
     <p v-for="user in users" :key="user.id">
       {{ user }}
     </p>
@@ -8,10 +10,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import Register from '@/components/Register';
 
 export default {
   name: "Blog",
   components: {
+    Register
   },
   data() {
     return {

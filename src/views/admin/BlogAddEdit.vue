@@ -1,11 +1,9 @@
 <template>
   <div>
     <div>
-      Blawg
+      Add/Edit Blog Post
     </div>
-    <div v-for="post in posts" :key="post.id">
-      {{ post }}
-    </div>
+    <textarea v-model="post"></textarea>
   </div>
 </template>
 
@@ -13,20 +11,21 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: "AdminBlog",
+  name: "BlogAddEdit",
   components: {
   },
   data() {
-    return {}
+    return {
+    }
   },
   computed: {
-    ...mapGetters(['posts'])
+    ...mapGetters(['post'])
   },
   mounted() {
-    this.fetchPosts();
+    if(this.$route.params.id) this.fetchPost(this.$route.params.id);
   },
   methods: {
-    ...mapActions(['fetchPosts'])
+    ...mapActions(['fetchPost'])
   }
 };
 </script>

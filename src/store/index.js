@@ -11,13 +11,17 @@ export default new Vuex.Store({
     user: null,
     userToken: null,
     users: [],
-    posts: []
+    post: null,
+    posts: [],
+    shows: []
   },
   getters: {
     user: state => state.user,
     users: state => state.users,
     userToken: state => state.userToken,
-    posts: state => state.posts
+    post: state => state.post,
+    posts: state => state.posts,
+    shows: state => state.shows
   },
   mutations: {
     setUser(state, user) {
@@ -31,6 +35,12 @@ export default new Vuex.Store({
     },
     setPosts(state, posts) {
       state.posts = posts;
+    },
+    setPost(state, post) {
+      state.post = post;
+    },
+    setShows(state, shows) {
+      state.shows = shows;
     }
   },
   actions: {
@@ -76,6 +86,28 @@ export default new Vuex.Store({
       axios.get(`${API}/posts`).then(
         response => {
           commit('setPosts', response.posts);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+    fetchPost({ commit }, id) {
+      axios.get(`${API}/post/${id}`).then(
+        response => {
+          commit('setPost', response.post);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+
+    // Shows
+    fetchShows({ commit }) {
+      axios.get(`${API}/shows`).then(
+        response => {
+          commit('setshows', response.shows);
         },
         error => {
           console.log(error);
