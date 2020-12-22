@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import router from '../router'
 
 Vue.use(Vuex);
 
@@ -85,7 +86,7 @@ export default new Vuex.Store({
     fetchPosts({ commit }) {
       axios.get(`${API}/posts`).then(
         response => {
-          commit('setPosts', response.posts);
+          commit('setPosts', response.data.posts);
         },
         error => {
           console.log(error);
@@ -93,9 +94,22 @@ export default new Vuex.Store({
       );
     },
     fetchPost({ commit }, id) {
-      axios.get(`${API}/post/${id}`).then(
+      axios.get(`${API}/posts/${id}`).then(
         response => {
-          commit('setPost', response.post);
+          console.log(response.data.post);
+          commit('setPost', response.data.post);
+        },
+        error => {
+          console.log("Error fetching post");
+          console.log(error);
+        }
+      );
+    },
+    addPost({ commit }, post) {
+      axios.post(`${API}/posts`, post).then(
+        response => {
+          commit('setPost', response.data.post);
+          router.push(`/admin/blog/edit/${response.data.post.id}`);
         },
         error => {
           console.log(error);
@@ -107,7 +121,7 @@ export default new Vuex.Store({
     fetchShows({ commit }) {
       axios.get(`${API}/shows`).then(
         response => {
-          commit('setshows', response.shows);
+          commit('setShows', response.shows);
         },
         error => {
           console.log(error);

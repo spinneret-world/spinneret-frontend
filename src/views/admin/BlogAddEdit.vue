@@ -3,7 +3,8 @@
     <div>
       Add/Edit Blog Post
     </div>
-    <textarea v-model="post"></textarea>
+    <textarea v-model="newPost.content"></textarea>
+    <button @click="submitPost" type="button">Submit</button>
   </div>
 </template>
 
@@ -16,16 +17,27 @@ export default {
   },
   data() {
     return {
+      newPost: {
+        content: "",
+        author_id: 1 //TODO read from store once token auth is set up
+      }
     }
   },
   computed: {
     ...mapGetters(['post'])
   },
   mounted() {
-    if(this.$route.params.id) this.fetchPost(this.$route.params.id);
+    if(this.$route.params.id) {
+      this.fetchPost(this.$route.params.id).then(()=>{
+        this.newPost = this.post;
+      });
+    }
   },
   methods: {
-    ...mapActions(['fetchPost'])
+    ...mapActions(['fetchPost', 'addPost']),
+    submitPost(){
+      this.addPost(this.newPost);
+    }
   }
 };
 </script>

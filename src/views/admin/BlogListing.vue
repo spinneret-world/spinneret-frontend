@@ -8,7 +8,7 @@
     </router-link>
     <div v-for="post in posts" :key="post.id">
       <ul>
-        <li><router-link :to="'/admin/blog/'+post.id">{{ post.title }}</router-link></li>
+        <li>{{ post.content }}<router-link :to="'/admin/blog/edit/'+post.id">{{ post.title }}<button type="button">Edit</button></router-link></li>
       </ul>
     </div>
   </div>
