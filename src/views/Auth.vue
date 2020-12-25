@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Signin v-if="!userToken" />
+    <Signin v-if="!user" />
     <div v-else>
       <div id="nav">
         <router-link to="/admin/users">Users</router-link> |
@@ -16,7 +16,7 @@ import { mapGetters } from 'vuex';
 import Signin from '@/components/Signin';
 
 export default {
-  name: "Blog",
+  name: "Admin",
   components: {
     Signin
   },
@@ -25,7 +25,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userToken'])
+    ...mapGetters(['user'])
   },
   mounted() {
   },

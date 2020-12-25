@@ -10,6 +10,35 @@
   </div>
 </template>
 
+<script>
+import { mapActions, mapMutations } from 'vuex';
+
+export default {
+  name: "App",
+  components: {
+  },
+  data() {
+    return {
+    }
+  },
+  computed: {
+  },
+  watch: {
+  },
+  mounted() {
+    if(this.$cookies.get('jwt')) {
+      this.setUserToken(this.$cookies.get('jwt'));
+      this.fetchUser();
+    }
+  },
+  methods: {
+    ...mapActions(['fetchUser']),
+    ...mapMutations(['setUserToken'])
+  }
+};
+
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

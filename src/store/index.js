@@ -33,6 +33,7 @@ export default new Vuex.Store({
     },
     setUserToken(state, token) {
       state.userToken = token;
+      Vue.$cookies.set('jwt', token);
     },
     setPosts(state, posts) {
       state.posts = posts;
@@ -57,11 +58,23 @@ export default new Vuex.Store({
         }
       );
     },
-    login({ commit }, payload) {
+    login({ commit, dispatch }, payload) {
       axios.post(`${API}/login`, payload).then(
         response => {
-          console.log(response);
           commit('setUserToken', response.data.token);
+          dispatch('fetchUser')
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+    fetchUser({ commit, state }) {
+      axios.get(`${API}/profile`, 
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
+        response => {
+          commit('setUser', response.data.user);
         },
         error => {
           console.log(error);
@@ -116,7 +129,16 @@ export default new Vuex.Store({
         }
       );
     },
-
+    patchPost({ commit }, post) {
+      axios.patch(`${API}/posts/${post.id}`, post).then(
+        response => {
+          commit('setPost', response.data.post);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
     // Shows
     fetchShows({ commit }) {
       axios.get(`${API}/shows`).then(

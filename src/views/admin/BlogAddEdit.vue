@@ -19,24 +19,32 @@ export default {
     return {
       newPost: {
         content: "",
-        author_id: 1 //TODO read from store once token auth is set up
       }
     }
   },
   computed: {
-    ...mapGetters(['post'])
+    ...mapGetters(['post', 'user'])
+  },
+  watch: {
+    'post': function() {
+      this.newPost = this.post;
+    }
   },
   mounted() {
     if(this.$route.params.id) {
-      this.fetchPost(this.$route.params.id).then(()=>{
-        this.newPost = this.post;
-      });
+      this.fetchPost(this.$route.params.id);
     }
   },
   methods: {
-    ...mapActions(['fetchPost', 'addPost']),
+    ...mapActions(['fetchPost', 'addPost', 'patchPost']),
     submitPost(){
-      this.addPost(this.newPost);
+      if (this.newPost.id) {
+        console.log(this.newPost);
+        this.patchPost(this.newPost);
+      } else {
+        this.newPost.author_id = this.user.id;
+        this.addPost(this.newPost);
+      }
     }
   }
 };
