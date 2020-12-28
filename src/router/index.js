@@ -51,6 +51,42 @@ const routes = [
     name: "Spinneret Admin | Blog",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/admin/BlogAddEdit.vue")
+  },
+  {
+    path: "/admin/experiences",
+    name: "Spinneret Admin | Experiences",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/ShowListing.vue")
+  },
+  {
+    path: "/admin/experiences/add",
+    name: "Spinneret Admin | Experiences",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/ShowAddEdit.vue")
+  },
+  {
+    path: "/admin/experiences/edit/:id",
+    name: "Spinneret Admin | Experiences",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/ShowAddEdit.vue")
+  },
+  {
+    path: "/admin/products",
+    name: "Spinneret Admin | Products",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/ProductListing.vue")
+  },
+  {
+    path: "/admin/products/add",
+    name: "Spinneret Admin | Products",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/ProductAddEdit.vue")
+  },
+  {
+    path: "/admin/products/edit/:id",
+    name: "Spinneret Admin | Products",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/ProductAddEdit.vue")
   }
 ];
 

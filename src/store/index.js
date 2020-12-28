@@ -14,6 +14,9 @@ export default new Vuex.Store({
     users: [],
     post: null,
     posts: [],
+    product: null,
+    products: [],
+    show: null,
     shows: []
   },
   getters: {
@@ -22,6 +25,9 @@ export default new Vuex.Store({
     userToken: state => state.userToken,
     post: state => state.post,
     posts: state => state.posts,
+    product: state => state.product,
+    products: state => state.products,
+    show: state => state.show,
     shows: state => state.shows
   },
   mutations: {
@@ -41,8 +47,17 @@ export default new Vuex.Store({
     setPost(state, post) {
       state.post = post;
     },
+    setProduct(state, product) {
+      state.product = product;
+    },
+    setProducts(state, products) {
+      state.products = products;
+    },
     setShows(state, shows) {
       state.shows = shows;
+    },
+    setShow(state, show) {
+      state.show = show;
     }
   },
   actions: {
@@ -139,17 +154,96 @@ export default new Vuex.Store({
         }
       );
     },
+
     // Shows
     fetchShows({ commit }) {
       axios.get(`${API}/shows`).then(
         response => {
-          commit('setShows', response.shows);
+          commit('setShows', response.data.shows);
         },
         error => {
           console.log(error);
         }
       );
-    }
+    },
+    fetchShow({ commit }, id) {
+      axios.get(`${API}/shows/${id}`).then(
+        response => {
+          console.log(response.data.show);
+          commit('setShow', response.data.show);
+        },
+        error => {
+          console.log("Error fetching show");
+          console.log(error);
+        }
+      );
+    },
+    addShow({ commit }, show) {
+      axios.post(`${API}/shows`, show).then(
+        response => {
+          commit('setShow', response.data.show);
+          router.push(`/admin/experiences/edit/${response.data.show.id}`);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+    patchShow({ commit }, show) {
+      axios.patch(`${API}/shows/${show.id}`, show).then(
+        response => {
+          commit('setShow', response.data.show);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+
+    // Products
+    fetchProducts({ commit }) {
+      axios.get(`${API}/products`).then(
+        response => {
+          commit('setProducts', response.data.products);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+    fetchProduct({ commit }, id) {
+      axios.get(`${API}/products/${id}`).then(
+        response => {
+          console.log(response.data.product);
+          commit('setProduct', response.data.product);
+        },
+        error => {
+          console.log("Error fetching product");
+          console.log(error);
+        }
+      );
+    },
+    addProduct({ commit }, product) {
+      axios.post(`${API}/products`, product).then(
+        response => {
+          commit('setProduct', response.data.product);
+          router.push(`/admin/products/edit/${response.data.product.id}`);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+    patchProduct({ commit }, product) {
+      axios.patch(`${API}/products/${product.id}`, product).then(
+        response => {
+          commit('setProduct', response.data.product);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
   },
   modules: {}
 });
