@@ -23,6 +23,24 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/ShowListing.vue")
   },
   {
+    path: "/shop",
+    name: "Shop",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Shop.vue")
+  },
+  {
+    path: "/shop/:id",
+    name: "Spinneret | Shop",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ProductDetail.vue")
+  },
+  {
+    path: "/order",
+    name: "Spinneret | Order",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Order.vue")
+  },
+  {
     path: "/admin",
     name: "Spinneret Admin",
     component: () =>

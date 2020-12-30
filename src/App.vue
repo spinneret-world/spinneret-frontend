@@ -5,6 +5,7 @@
       <router-link to="/admin">Admin</router-link> |
       <router-link to="/blog">Blog</router-link> |
       <router-link to="/experiences">Experiences</router-link> |
+      <router-link to="/shop">Shop</router-link> |
     </div>
     <router-view />
   </div>

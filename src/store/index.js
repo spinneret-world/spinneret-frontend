@@ -12,6 +12,8 @@ export default new Vuex.Store({
     user: null,
     userToken: null,
     users: [],
+    order: null,
+    orders: [],
     post: null,
     posts: [],
     product: null,
@@ -23,6 +25,8 @@ export default new Vuex.Store({
     user: state => state.user,
     users: state => state.users,
     userToken: state => state.userToken,
+    order: state => state.order,
+    orders: state => state.orders,
     post: state => state.post,
     posts: state => state.posts,
     product: state => state.product,
@@ -40,6 +44,12 @@ export default new Vuex.Store({
     setUserToken(state, token) {
       state.userToken = token;
       Vue.$cookies.set('jwt', token);
+    },
+    setOrders(state, orders) {
+      state.orders = orders;
+    },
+    setOrder(state, order) {
+      state.order = order;
     },
     setPosts(state, posts) {
       state.posts = posts;
@@ -244,6 +254,53 @@ export default new Vuex.Store({
         }
       );
     },
+
+    // Orders
+    fetchOrders({ commit }) {
+      axios.get(`${API}/orders`).then(
+        response => {
+          commit('setOrders', response.data.orders);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+    fetchOrder({ commit }, id) {
+      axios.get(`${API}/orders/${id}`).then(
+        response => {
+          console.log(response.data.order);
+          commit('setOrder', response.data.order);
+        },
+        error => {
+          console.log("Error fetching order");
+          console.log(error);
+        }
+      );
+    },
+    addOrder({ commit }, order) {
+      axios.post(`${API}/orders`, order).then(
+        response => {
+          commit('setOrder', response.data.order);
+          // TODO: Success page?
+          router.push(`/shop`);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+    patchOrder({ commit }, order) {
+      axios.patch(`${API}/orders/${order.id}`, order).then(
+        response => {
+          commit('setOrder', response.data.order);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+
   },
   modules: {}
 });

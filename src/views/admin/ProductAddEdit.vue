@@ -7,7 +7,7 @@
       <input v-model="newProduct.name"/>
     </label>
     <label> Image Link
-      <input v-model="newProduct.image_link"/>
+      <input type="url" v-model="newProduct.image_link"/>
     </label>
     <label> Creator
       <input v-model="newProduct.creator"/>
