@@ -143,8 +143,11 @@ export default new Vuex.Store({
         }
       );
     },
-    addPost({ commit }, post) {
-      axios.post(`${API}/posts`, post).then(
+    addPost({ commit, state }, post) {
+      axios.post(`${API}/posts`, 
+        post,
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
         response => {
           commit('setPost', response.data.post);
           router.push(`/admin/blog/edit/${response.data.post.id}`);
@@ -154,8 +157,11 @@ export default new Vuex.Store({
         }
       );
     },
-    patchPost({ commit }, post) {
-      axios.patch(`${API}/posts/${post.id}`, post).then(
+    patchPost({ commit, state }, post) {
+      axios.patch(`${API}/posts/${post.id}`, 
+        post,
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
         response => {
           commit('setPost', response.data.post);
         },
@@ -188,8 +194,11 @@ export default new Vuex.Store({
         }
       );
     },
-    addShow({ commit }, show) {
-      axios.post(`${API}/shows`, show).then(
+    addShow({ commit, state }, show) {
+      axios.post(`${API}/shows`, 
+        show,
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
         response => {
           commit('setShow', response.data.show);
           router.push(`/admin/experiences/edit/${response.data.show.id}`);
@@ -199,8 +208,11 @@ export default new Vuex.Store({
         }
       );
     },
-    patchShow({ commit }, show) {
-      axios.patch(`${API}/shows/${show.id}`, show).then(
+    patchShow({ commit, state }, show) {
+      axios.patch(`${API}/shows/${show.id}`, 
+        show,
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
         response => {
           commit('setShow', response.data.show);
         },
@@ -233,8 +245,11 @@ export default new Vuex.Store({
         }
       );
     },
-    addProduct({ commit }, product) {
-      axios.post(`${API}/products`, product).then(
+    addProduct({ commit, state }, product) {
+      axios.post(`${API}/products`, 
+        product,
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
         response => {
           commit('setProduct', response.data.product);
           router.push(`/admin/products/edit/${response.data.product.id}`);
@@ -244,8 +259,11 @@ export default new Vuex.Store({
         }
       );
     },
-    patchProduct({ commit }, product) {
-      axios.patch(`${API}/products/${product.id}`, product).then(
+    patchProduct({ commit, state }, product) {
+      axios.patch(`${API}/products/${product.id}`, 
+        product,
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
         response => {
           commit('setProduct', response.data.product);
         },
@@ -278,8 +296,11 @@ export default new Vuex.Store({
         }
       );
     },
-    addOrder({ commit }, order) {
-      axios.post(`${API}/orders`, order).then(
+    addOrder({ commit, state }, order) {
+      axios.post(`${API}/orders`, 
+        order,
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
         response => {
           commit('setOrder', response.data.order);
           // TODO: Success page?
@@ -290,8 +311,11 @@ export default new Vuex.Store({
         }
       );
     },
-    patchOrder({ commit }, order) {
-      axios.patch(`${API}/orders/${order.id}`, order).then(
+    patchOrder({ commit, state }, order) {
+      axios.patch(`${API}/orders/${order.id}`, 
+        order,
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
         response => {
           commit('setOrder', response.data.order);
         },
