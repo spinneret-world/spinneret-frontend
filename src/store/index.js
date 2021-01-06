@@ -274,8 +274,10 @@ export default new Vuex.Store({
     },
 
     // Orders
-    fetchOrders({ commit }) {
-      axios.get(`${API}/orders`).then(
+    fetchOrders({ commit, state }) {
+      axios.get(`${API}/orders`,
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
         response => {
           commit('setOrders', response.data.orders);
         },
@@ -284,8 +286,10 @@ export default new Vuex.Store({
         }
       );
     },
-    fetchOrder({ commit }, id) {
-      axios.get(`${API}/orders/${id}`).then(
+    fetchOrder({ commit, state }, id) {
+      axios.get(`${API}/orders/${id}`,
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
         response => {
           console.log(response.data.order);
           commit('setOrder', response.data.order);
@@ -296,10 +300,9 @@ export default new Vuex.Store({
         }
       );
     },
-    addOrder({ commit, state }, order) {
+    addOrder({ commit }, order) {
       axios.post(`${API}/orders`, 
         order,
-        { headers:  { Authorization: `bearer ${state.userToken}`}}
       ).then(
         response => {
           commit('setOrder', response.data.order);

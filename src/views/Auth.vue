@@ -7,6 +7,7 @@
         <router-link to="/admin/blog">Blog</router-link> |
         <router-link to="/admin/experiences">Experiences</router-link> |
         <router-link to="/admin/products">Products</router-link> |
+        <router-link to="/admin/orders">Orders</router-link> |
       </div>
       <h1> Welcome! </h1>
     </div>

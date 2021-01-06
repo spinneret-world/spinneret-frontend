@@ -105,7 +105,13 @@ const routes = [
     name: "Spinneret Admin | Products",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/admin/ProductAddEdit.vue")
-  }
+  },
+  {
+    path: "/admin/orders",
+    name: "Spinneret Admin | orders",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/OrderListing.vue")
+  },
 ];
 
 const router = new VueRouter({
