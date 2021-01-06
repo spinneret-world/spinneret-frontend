@@ -8,6 +8,7 @@
       <router-link to="/shop">Shop</router-link> |
     </div>
     <router-view />
+    <audio controls src="https://streampusher-relay.club/datafruits.mp3"></audio>
   </div>
 </template>
 
