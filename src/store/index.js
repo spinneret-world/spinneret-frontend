@@ -18,6 +18,7 @@ export default new Vuex.Store({
     posts: [],
     product: null,
     products: [],
+    settings: null,
     show: null,
     shows: []
   },
@@ -31,6 +32,7 @@ export default new Vuex.Store({
     posts: state => state.posts,
     product: state => state.product,
     products: state => state.products,
+    settings: state => state.settings,
     show: state => state.show,
     shows: state => state.shows
   },
@@ -63,6 +65,9 @@ export default new Vuex.Store({
     setProducts(state, products) {
       state.products = products;
     },
+    setSettings(state, settings) {
+      state.settings = settings;
+    },
     setShows(state, shows) {
       state.shows = shows;
     },
@@ -72,7 +77,7 @@ export default new Vuex.Store({
   },
   actions: {
 
-    // Auth
+  // Auth
     register({ commit }, payload) {
       axios.post(`${API}/register`, payload).then(
         response => {
@@ -321,6 +326,31 @@ export default new Vuex.Store({
       ).then(
         response => {
           commit('setOrder', response.data.order);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+
+    // Settings
+    fetchSettings({ commit }) {
+      axios.get(`${API}/settings`).then(
+        response => {
+          commit('setSettings', response.data.settings);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    },
+    addSettings({ commit, state }, settings) {
+      axios.post(`${API}/settings`, 
+        settings,
+        { headers:  { Authorization: `bearer ${state.userToken}`}}
+      ).then(
+        response => {
+          commit('setSettings', response.data.settings);
         },
         error => {
           console.log(error);

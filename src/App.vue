@@ -7,13 +7,23 @@
       <router-link to="/experiences">Experiences</router-link> |
       <router-link to="/shop">Shop</router-link> |
     </div>
+    <div v-if="user">
+      <div>
+        <router-link to="/admin/users">Users</router-link> |
+        <router-link to="/admin/blog">Blog</router-link> |
+        <router-link to="/admin/experiences">Experiences</router-link> |
+        <router-link to="/admin/products">Products</router-link> |
+        <router-link to="/admin/orders">Orders</router-link> |
+        <router-link to="/admin/settings">Settings</router-link> 
+      </div>
+    </div>
     <router-view />
     <audio controls src="https://streampusher-relay.club/datafruits.mp3"></audio>
   </div>
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: "App",
@@ -24,6 +34,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['user', 'settings'])
   },
   watch: {
   },
@@ -31,10 +42,11 @@ export default {
     if(this.$cookies.get('jwt')) {
       this.setUserToken(this.$cookies.get('jwt'));
       this.fetchUser();
+      this.fetchSettings();
     }
   },
   methods: {
-    ...mapActions(['fetchUser']),
+    ...mapActions(['fetchUser', 'fetchSettings']),
     ...mapMutations(['setUserToken'])
   }
 };

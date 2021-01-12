@@ -108,9 +108,15 @@ const routes = [
   },
   {
     path: "/admin/orders",
-    name: "Spinneret Admin | orders",
+    name: "Spinneret Admin | Orders",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/admin/OrderListing.vue")
+  },
+  {
+    path: "/admin/settings",
+    name: "Spinneret Admin | Settings",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/Settings.vue")
   },
 ];
 

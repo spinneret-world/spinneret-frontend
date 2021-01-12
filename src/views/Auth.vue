@@ -1,16 +1,7 @@
 <template>
   <div>
     <Signin v-if="!user" />
-    <div v-else>
-      <div id="nav">
-        <router-link to="/admin/users">Users</router-link> |
-        <router-link to="/admin/blog">Blog</router-link> |
-        <router-link to="/admin/experiences">Experiences</router-link> |
-        <router-link to="/admin/products">Products</router-link> |
-        <router-link to="/admin/orders">Orders</router-link> |
-      </div>
-      <h1> Welcome! </h1>
-    </div>
+    <h1 v-else> Welcome! </h1>
   </div>
 </template>
 
