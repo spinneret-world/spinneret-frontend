@@ -74,4 +74,9 @@ export default {
     }
   }
 }
+
+/*  Chatango */
+iframe {
+  min-height: 200px;
+}
 </style>
